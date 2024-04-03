@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // 엔터 시 할 일 추가
     addListInput.addEventListener('keypress', function (e) {
         if (e.key === 'Enter') {
-            const inputValue = addListInput.value.trim();
+            const inputValue = addListInput.value;
             if (inputValue !== '') {
                 const listItem = createListItem(inputValue);
                 todoList.appendChild(listItem);

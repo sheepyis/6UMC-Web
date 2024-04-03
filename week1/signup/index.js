@@ -9,7 +9,7 @@ function nameCheck() {
     const name = document.getElementById("name");
     const nameError = document.getElementById("nameError");
 
-    if (name.value.trim() === '') {
+    if (name.value === '') {
         nameError.style.color = '#FC0E0E';
         nameError.textContent = '필수 입력 항목입니다.';
         isName = false;
@@ -31,7 +31,7 @@ function emailCheck() {
     const emailError = document.getElementById("emailError");
     const emailPattern = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/; 
 
-    if (email.value.trim() === '' || emailPattern.test(email.value) == false) {
+    if (email.value === '' || emailPattern.test(email.value) == false) {
         emailError.style.color = '#FC0E0E';
         emailError.textContent = '올바른 이메일 형식이 아닙니다.';
         isEmail = false;
@@ -52,7 +52,7 @@ function ageCheck() {
     const age = document.getElementById("age");
     const ageError = document.getElementById("ageError");
 
-    if (age.value.trim() === '') {
+    if (age.value === '') {
         ageError.style.color = '#FC0E0E';
         ageError.textContent = '나이를 입력해주세요!';
         isAge = false;
@@ -92,7 +92,7 @@ function passwordCheck() {
     const passwordError = document.getElementById("passwordError");
     const passwordPattern = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*?_])+/;
 
-    if (password.value.trim() === '' || (password.value).length < 4) {
+    if (password.value === '' || (password.value).length < 4) {
         passwordError.style.color = '#FC0E0E';
         passwordError.textContent = '비밀번호는 최소 4자리 이상이어야 합니다.';
         isPassword = false;
@@ -122,7 +122,7 @@ function passwordcheckCheck() {
     const passwordcheckError = document.getElementById("passwordcheckError");
     const password = document.getElementById("password");
 
-    if (passwordcheck.value.trim() === '' || password.value != passwordcheck.value) {
+    if (passwordcheck.value === '' || password.value != passwordcheck.value) {
         passwordcheckError.style.color = '#FC0E0E';
         passwordcheckError.textContent = '비밀번호가 일치하지 않습니다.';
         isPasswordcheck = false;
