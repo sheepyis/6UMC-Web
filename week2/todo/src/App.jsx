@@ -51,7 +51,7 @@ const App = () => {
     { id: 4, content: "Watching You-Tube", isDone: true },
   ]);
 
-  // 할 일 추가
+  // 할 일 추가 -> id 체크해서 중복된 id 만들어지지 않도록
   const addTodo = (content) => {
     let newId = todos.length > 0 ? todos[todos.length - 1].id + 1 : 1;
 
