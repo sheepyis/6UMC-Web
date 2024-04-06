@@ -4,8 +4,8 @@ const ListRight = ({ data, removeItem }) => {
     return (
         <>
             {data.map((item) => (
-                <ItemRight 
-                    key={item.id} 
+                <ItemRight
+                    key={item.id}
                     id={item.id}
                     content={item.content} 
                     removeItem={removeItem}

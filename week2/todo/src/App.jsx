@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react';
 import styled from "styled-components";
 import TodoInput from './components/TodoInput';
 import ListLeft from './components/list/list-left';
@@ -53,13 +53,19 @@ const App = () => {
 
   // 할 일 추가
   const addTodo = (content) => {
+    let newId = todos.length > 0 ? todos[todos.length - 1].id + 1 : 1;
+
+    while (todos.some(todo => todo.id === newId)) {
+        newId++;
+    }
+
     const newTodo = {
-      id: todos.length + 1,
-      content,
-      isDone: false
+        id: newId,
+        content,
+        isDone: false
     };
     setTodos([...todos, newTodo]);
-  }
+}
 
   // 완료된 항목 이동 -> true로 변화
   const moveItemToRight = (id) => {
@@ -97,4 +103,4 @@ const App = () => {
   )
 }
 
-export default App
+export default App;

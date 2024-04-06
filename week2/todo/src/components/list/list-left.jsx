@@ -5,8 +5,8 @@ const ListLeft = ({ data, moveItemToRight }) => {
     return (
         <>
             {data.map((item) => (
-                <ItemLeft 
-                    key={item.id} 
+                <ItemLeft
+                    key={item.id}
                     id={item.id}
                     content={item.content} 
                     moveItemToRight={moveItemToRight}
