@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { FaStar } from "react-icons/fa";
 
-const PopularBox = styled.div`
+const MovieBox = styled.div`
     width: 90%;
     margin: 1vw 0.5vw;
     position: relative;
@@ -13,7 +13,7 @@ const Poster = styled.img`
     height: 15vw;
 `
 
-const PopularBoxBottom = styled.div`
+const MovieBoxBottom = styled.div`
     width: 100%;
     height: 3.5vw;
     padding-top: 0.5vw;
@@ -54,7 +54,7 @@ const OverView = styled.p`
     padding-right: 0.5vw;
 `;
 
-const ItemPopular = ({id, poster, title, rating, overview}) => {
+const ItemMovie = ({id, poster, title, rating, overview}) => {
     // explain 보이기
     const handleMouseOver = (e) => {
         e.currentTarget.querySelector('.overExplain').style.display = 'block';
@@ -66,9 +66,9 @@ const ItemPopular = ({id, poster, title, rating, overview}) => {
     };
 
     return (
-        <PopularBox key={id} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
+        <MovieBox key={id} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
             <Poster src={poster} alt="poster"/>
-            <PopularBoxBottom>
+            <MovieBoxBottom>
                 <div className="titleBox" style={{display: "flex", justifyContent: "space-between", alignItems:"flex-start", width: "90%"}}>
                     <SubTitle style={{width: "70%"}}>{title}</SubTitle>
                     <div className="rating" style={{display: "flex", alignItems: "center", gap: "0.2vw"}}>
@@ -76,14 +76,14 @@ const ItemPopular = ({id, poster, title, rating, overview}) => {
                         <SubTitle>{rating}</SubTitle>
                     </div>
                 </div>
-            </PopularBoxBottom>
+            </MovieBoxBottom>
 
             <OverExplain className="overExplain">
                 <OverTitle>{title}</OverTitle>
                 <OverView>{overview}</OverView>
             </OverExplain>
-        </PopularBox>
+        </MovieBox>
     );
 };
 
-export default ItemPopular;
+export default ItemMovie;

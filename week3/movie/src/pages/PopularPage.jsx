@@ -1,4 +1,4 @@
-import ListPopular from "../components/PopularPage/list/list-popular";
+import ListMovie from "../components/list/list-movie";
 import styled from "styled-components";
 
 const PopularContainer = styled.div`
@@ -12,7 +12,7 @@ const PopularContainer = styled.div`
 const PopularPage = () => {
     return (
         <PopularContainer>
-            <ListPopular/>
+            <ListMovie Url="https://api.themoviedb.org/3/movie/popular?language=ko"/>
         </PopularContainer>
     )
 }

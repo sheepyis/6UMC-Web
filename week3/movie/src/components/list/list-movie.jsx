@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
-import ItemPopular from "../listItem/item-popular";
+import ItemMovie from "../listItem/item-movie";
 
-const PopularContainer = styled.div`
+const Container = styled.div`
     width: 95%;
     display: grid;
     grid-template-columns: repeat(8, 1fr);
 `;
 
-const ListPopular = () => {
+const ListMovie = ({ Url }) => {
     const [movies, setMovies] = useState([]);
     const accessToken = import.meta.env.VITE_API_ACCESS;
 
@@ -22,16 +22,16 @@ const ListPopular = () => {
             }
         };
 
-        fetch('https://api.themoviedb.org/3/movie/popular?language=ko', options)
+        fetch(Url, options)
             .then(response => response.json())
             .then(response => setMovies(response.results))
             .catch(err => console.error(err));
-    }, []);
+    }, [Url]);
 
     return (
-        <PopularContainer>
+        <Container>
             {movies.map((item) => (
-                <ItemPopular 
+                <ItemMovie 
                     key={item.id} 
                     id={item.id}
                     poster={`https://image.tmdb.org/t/p/w500/${item.poster_path}`}
@@ -40,8 +40,8 @@ const ListPopular = () => {
                     overview={item.overview}
                 />
             ))}
-        </PopularContainer>
+        </Container>
     );
 };
 
-export default ListPopular;
+export default ListMovie;
