@@ -1,7 +1,7 @@
 import ListMovie from "../components/list/list-movie";
 import styled from "styled-components";
 
-const PopularContainer = styled.div`
+const UpComingContainer = styled.div`
     width: 100%;
     min-height: calc(100vh - 6vw);
     display: flex;
@@ -9,12 +9,12 @@ const PopularContainer = styled.div`
     align-items: center;
 `
 
-const PopularPage = () => {
+const UpComingPage = () => {
     return (
-        <PopularContainer>
-            <ListMovie Url="https://api.themoviedb.org/3/movie/popular"/>
-        </PopularContainer>
+        <UpComingContainer>
+            <ListMovie Url="https://api.themoviedb.org/3/movie/upcoming"/>
+        </UpComingContainer>
     )
 }
 
-export default PopularPage;
+export default UpComingPage;

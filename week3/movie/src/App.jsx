@@ -9,7 +9,7 @@ import MainPage from './pages/MainPage';
 import PopularPage from './pages/PopularPage';
 import NowPlayingPage from './pages/NowPlayingPage';
 import TopRatedPage from './pages/TopRatedPage';
-import UpComing from './pages/UpComing';
+import UpComing from './pages/UpComingPage';
 
 
 function App() {

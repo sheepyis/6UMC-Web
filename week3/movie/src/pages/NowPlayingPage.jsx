@@ -12,7 +12,7 @@ const NowPlayingContainer = styled.div`
 const NowPlayingPage = () => {
     return (
         <NowPlayingContainer>
-            <ListMovie Url="https://api.themoviedb.org/3/movie/now_playing?language=ko"/>
+            <ListMovie Url="https://api.themoviedb.org/3/movie/now_playing"/>
         </NowPlayingContainer>
     )
 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
+import axios from 'axios';
 import styled from "styled-components";
-
 import ItemMovie from "../listItem/item-movie";
 
 const Container = styled.div`
@@ -16,15 +16,16 @@ const ListMovie = ({ Url }) => {
     useEffect(() => {
         const options = {
             method: 'GET',
+            url: Url,
+            params: { language: 'ko' },
             headers: {
                 accept: 'application/json',
                 Authorization: `Bearer ${accessToken}`
             }
         };
 
-        fetch(Url, options)
-            .then(response => response.json())
-            .then(response => setMovies(response.results))
+        axios.request(options)
+            .then(response => setMovies(response.data.results))
             .catch(err => console.error(err));
     }, [Url]);
 
