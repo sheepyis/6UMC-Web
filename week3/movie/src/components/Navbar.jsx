@@ -1,5 +1,6 @@
+import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const NavContainer = styled.div`
     width: 100%;
@@ -27,7 +28,7 @@ const NavPContainer = styled.div`
 const NavP = styled(Link)`
     font-size: 1vw;
     font-weight: bold;
-    color: white;
+    color: ${({ isActive }) => isActive ? "#FFCC15" : "white"};
     cursor: pointer;
 
     &:hover {
@@ -37,16 +38,18 @@ const NavP = styled(Link)`
 `
 
 const Navbar = () => {
+    const location = useLocation();
+
     return (
         <NavContainer>
             <NavContainer2>
                 <NavP to="/">UMC Movie</NavP>
                 <NavPContainer>
-                    <NavP to="/signup">회원가입</NavP>
-                    <NavP to="/popular">Popular</NavP>
-                    <NavP to="/now">Now Playing</NavP>
-                    <NavP to="/top">Top Rated</NavP>
-                    <NavP to="/up">Upcoming</NavP>
+                    <NavP to="/signup" isActive={location.pathname === "/signup"}>회원가입</NavP>
+                    <NavP to="/popular" isActive={location.pathname === "/popular"}>Popular</NavP>
+                    <NavP to="/now" isActive={location.pathname === "/now"}>Now Playing</NavP>
+                    <NavP to="/top" isActive={location.pathname === "/top"}>Top Rated</NavP>
+                    <NavP to="/up" isActive={location.pathname === "/up"}>Upcoming</NavP>
                 </NavPContainer>
             </NavContainer2>
         </NavContainer>
