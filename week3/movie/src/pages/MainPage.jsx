@@ -1,14 +1,7 @@
 import styled from "styled-components";
+import PageContainer from "../styles/PageStyle";
 import Banner from "../components/MainPage/Banner";
 import SearchIcon from "../assets/images/searchIcon.png";
-
-const MainContainer = styled.div`
-    width: 100%;
-    min-height: calc(100vh - 6vw);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-`
 
 const SearchBox = styled.div`
     width: 25.75vw;
@@ -50,7 +43,7 @@ const SearchImg = styled.img`
 
 const MainPage = () => {
     return (
-        <MainContainer>
+        <PageContainer>
             <Banner/>
             <SearchBox>
                 <MainP>Find your movies!</MainP>
@@ -59,7 +52,7 @@ const MainPage = () => {
                     <SearchImg src={SearchIcon} alt="search"/>
                 </SearchBox2>
             </SearchBox>
-        </MainContainer>
+        </PageContainer>
     )
 }
 
