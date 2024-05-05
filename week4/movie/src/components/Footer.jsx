@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useLocation } from "react-router-dom";
 
 const FooterContainer = styled.div`
     width: 100%;
@@ -16,6 +17,13 @@ const FooterP = styled.p`
 `
 
 const Footer = () => {
+    const location = useLocation();
+    const showFooter = location.pathname === '/' || location.pathname === '/popular' || location.pathname === '/now' || location.pathname === "/top" || location.pathname === "/top" || location.pathname === "/up" || location.pathname.startsWith("/movie/");;
+
+    if (!showFooter) {
+        return null;
+    }
+
     return (
         <FooterContainer>
             <FooterP>UMC 6th Web_Hansung Univ</FooterP>

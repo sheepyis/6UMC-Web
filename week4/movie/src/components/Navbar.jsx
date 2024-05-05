@@ -51,6 +51,12 @@ const Navbar = () => {
         setLogin(!login);
     };
 
+    const showNav = location.pathname === '/' || location.pathname === '/popular' || location.pathname === '/now' || location.pathname === "/top" || location.pathname === "/top" || location.pathname === "/up" || location.pathname.startsWith("/movie/");;
+
+    if (!showNav) {
+        return null;
+    }
+
     return (
         <NavContainer>
             <NavContainer2>
