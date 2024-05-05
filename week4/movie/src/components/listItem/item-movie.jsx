@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { FaStar } from "react-icons/fa";
+import { useParams, useNavigate } from "react-router-dom";
 
 const MovieBox = styled.div`
     width: 90%;
@@ -54,7 +55,15 @@ const OverView = styled.p`
     padding-right: 0.5vw;
 `;
 
-const ItemMovie = ({id, poster, title, rating, overview}) => {
+const ItemMovie = ({id, poster, original_title, title, rating, overview, release_date}) => {
+    const navigate = useNavigate();
+    const params = useParams();
+
+    const handleClick = () => {
+        navigate(`/movie/${original_title}`, { state: { movie: { id, poster, title, rating, overview, release_date } } });
+    };
+
+
     // explain 보이기
     const handleMouseOver = (e) => {
         e.currentTarget.querySelector('.overExplain').style.display = 'block';
@@ -66,7 +75,7 @@ const ItemMovie = ({id, poster, title, rating, overview}) => {
     };
 
     return (
-        <MovieBox key={id} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
+        <MovieBox key={id} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} onClick={handleClick}>
             <Poster src={poster} alt="poster"/>
             <MovieBoxBottom>
                 <div className="titleBox" style={{display: "flex", justifyContent: "space-between", alignItems:"flex-start", width: "90%"}}>

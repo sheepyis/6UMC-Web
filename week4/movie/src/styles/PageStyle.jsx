@@ -6,6 +6,9 @@ const PageContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-`
+    background: ${props => props.background ? `url(${props.background})` : 'none'};
+    background-size: cover;
+    background-position: center;
+`;
 
 export default PageContainer;

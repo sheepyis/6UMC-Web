@@ -25,7 +25,10 @@ const ListMovie = ({ Url }) => {
         };
 
         axios.request(options)
-            .then(response => setMovies(response.data.results))
+            .then(response => {
+                setMovies(response.data.results);
+                console.log(response.data.results);
+        })
             .catch(err => console.error(err));
     }, [Url]);
 
@@ -37,6 +40,8 @@ const ListMovie = ({ Url }) => {
                     id={item.id}
                     poster={`https://image.tmdb.org/t/p/w500/${item.poster_path}`}
                     title={item.title}
+                    original_title={item.original_title}
+                    release_date={item.release_date}
                     rating={item.vote_average.toFixed(1)}
                     overview={item.overview}
                 />
