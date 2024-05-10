@@ -17,7 +17,7 @@ const Poster = styled.img`
 
 const MovieBoxBottom = styled.div`
     width: 100%;
-    height: 3.5vw;
+    height: 4vw;
     padding-top: 0.5vw;
     background-color: #383B67;
     display: flex;
@@ -31,16 +31,16 @@ const SubTitle = styled.p`
 
 const OverExplain = styled.div`
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 2.5%;
+    left: 3.5%;
     right: 0;
     bottom: 0;
     background-color: black;
     opacity: 0.8;
     color: white;
     font-size: 0.5vw;
-    width: 100%;
-    height: 100%;
+    width: 93%;
+    height: 95%;
     overflow: hidden;
     text-overflow: ellipsis;
     display: none;
