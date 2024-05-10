@@ -30,7 +30,7 @@ const ListResult = ({searchResults}) => {
                     key={item.id} 
                     id={item.id}
                     poster={`https://image.tmdb.org/t/p/w500/${item.poster_path}`}
-                    title={item.title}
+                    title={item.original_title}
                     original_title={item.original_title}
                     release_date={item.release_date}
                     rating={item.vote_average.toFixed(1)}
