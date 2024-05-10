@@ -31,7 +31,7 @@ const SubTitle = styled.p`
 
 const OverExplain = styled.div`
     position: absolute;
-    top: 2.5%;
+    top: 2%;
     left: 3.5%;
     right: 0;
     bottom: 0;
@@ -40,7 +40,7 @@ const OverExplain = styled.div`
     color: white;
     font-size: 0.5vw;
     width: 93%;
-    height: 95%;
+    height: 96%;
     overflow: hidden;
     text-overflow: ellipsis;
     display: none;
