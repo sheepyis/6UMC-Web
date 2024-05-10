@@ -1,6 +1,9 @@
+import React, { useState } from "react";
 import styled from "styled-components";
+import axios from "axios";
 import PageContainer from "../styles/PageStyle";
 import Banner from "../components/MainPage/Banner";
+import ListResult from "../components/list/list-result";
 import SearchIcon from "../assets/images/searchIcon.png";
 
 const SearchBox = styled.div`
@@ -42,16 +45,52 @@ const SearchImg = styled.img`
 `
 
 const MainPage = () => {
+    const [search, setSearch] = useState("");
+    const [searchResults, setSearchResults] = useState([]);
+    const accessToken = import.meta.env.VITE_API_ACCESS;
+
+    const handleSearch = () => {
+        const options = {
+            method: 'GET',
+            url: 'https://api.themoviedb.org/3/search/movie',
+            params: {
+                include_adult: 'false',
+                language: 'en-US',
+                page: '1',
+                query: search
+            },
+            headers: {
+                accept: 'application/json',
+                Authorization: `Bearer ${accessToken}`
+            }
+        };
+
+        axios.request(options)
+            .then(response => {
+                setSearchResults(response.data.results);
+                console.log(response.data.results);
+            })
+            .catch(err => console.error(err));
+    };
+
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            handleSearch();
+        }
+    };
+
     return (
         <PageContainer>
             <Banner/>
             <SearchBox>
                 <MainP>Find your movies!</MainP>
                 <SearchBox2>
-                    <SearchInput/>
-                    <SearchImg src={SearchIcon} alt="search"/>
+                    <SearchInput type="text" value={search} onChange={(e) => setSearch(e.target.value)} onKeyDown={handleKeyDown} placeholder="Search.."/>
+                    <SearchImg src={SearchIcon} alt="search" onClick={handleSearch}/>
                 </SearchBox2>
             </SearchBox>
+
+            <ListResult searchResults={searchResults}/>
         </PageContainer>
     )
 }
