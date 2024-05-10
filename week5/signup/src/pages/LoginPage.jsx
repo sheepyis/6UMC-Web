@@ -40,8 +40,6 @@ const LoginPage = () => {
         const signupLogs = localStorage.getItem('signupLogs');
         if (signupLogs) {
             console.log(JSON.parse(signupLogs));
-            // 로그를 출력한 후 로컬 스토리지에서 삭제
-            localStorage.removeItem('signupLogs');
         }
     }, []);
 

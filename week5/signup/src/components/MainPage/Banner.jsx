@@ -16,9 +16,12 @@ const BannerP = styled.p`
 `
 
 const Banner = () => {
+    const signupLogs = localStorage.getItem('signupLogs');
+    const username = signupLogs ? JSON.parse(signupLogs).username : "";
+
     return (
         <BannerContainer>
-            <BannerP>환영합니다</BannerP>
+            <BannerP>{username + "님"} 환영합니다</BannerP>
         </BannerContainer>
     )
 }
