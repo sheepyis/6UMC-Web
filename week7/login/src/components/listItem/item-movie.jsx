@@ -3,15 +3,15 @@ import { FaStar } from "react-icons/fa";
 import { useParams, useNavigate } from "react-router-dom";
 
 const MovieBox = styled.div`
-    width: 90%;
-    margin: 1vw 0.5vw;
+    width: 80%;
+    margin: 1vw 1.5vw;
     position: relative;
     cursor: pointer;
 `
 
 const Poster = styled.img`
     width: 100%;
-    height: 15vw;
+    height: 14vw;
 `
 
 const MovieBoxBottom = styled.div`

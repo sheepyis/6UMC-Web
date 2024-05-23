@@ -4,12 +4,12 @@ import styled from "styled-components";
 import ItemMovie from "../listItem/item-movie";
 
 const Container = styled.div`
-    width: 95%;
+    width: 65%;
     display: grid;
-    grid-template-columns: repeat(8, 1fr);
+    grid-template-columns: repeat(4, 1fr);
 `;
 
-const ListMovie = ({ Url }) => {
+const ListMovie = ({ Url, currentPage }) => {
     const [movies, setMovies] = useState([]);
     const accessToken = import.meta.env.VITE_API_ACCESS;
 
@@ -17,7 +17,7 @@ const ListMovie = ({ Url }) => {
         const options = {
             method: 'GET',
             url: Url,
-            params: { language: 'ko' },
+            params: { language: 'ko', page: `${currentPage}` },
             headers: {
                 accept: 'application/json',
                 Authorization: `Bearer ${accessToken}`
@@ -30,7 +30,7 @@ const ListMovie = ({ Url }) => {
                 console.log(response.data.results);
         })
             .catch(err => console.error(err));
-    }, [Url]);
+    }, [Url, currentPage]);
 
     return (
         <Container>
