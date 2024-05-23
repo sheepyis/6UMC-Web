@@ -21,13 +21,13 @@ const Pagination = ({ Url, onPageChange }) => {
     const accessToken = import.meta.env.VITE_API_ACCESS;
 
     const [totalPages, setTotalPages] = useState(0);
-    const [currentPage, setCurrentPage] = useState(1);
+    const [pagingPage, setPagingPage] = useState(1);
 
     useEffect(() => {
         const options = {
             method: 'GET',
             url: Url,
-            params: { language: 'ko', page: currentPage },
+            params: { language: 'ko', page: pagingPage },
             headers: {
                 accept: 'application/json',
                 Authorization: `Bearer ${accessToken}`
@@ -40,25 +40,25 @@ const Pagination = ({ Url, onPageChange }) => {
                 setTotalPages(totalPages);
         })
             .catch(err => console.error("Error: ", err));
-    }, [Url, currentPage]);
+    }, [Url, pagingPage]);
 
     const goToPreviousPage = () => {
-        const newPage = Math.max(currentPage - 1, 1);
-        setCurrentPage(newPage);
+        const newPage = Math.max(pagingPage - 1, 1);
+        setPagingPage(newPage);
         onPageChange(newPage);
     };
 
     const goToNextPage = () => {
-        const newPage = Math.min(currentPage + 1, totalPages);
-        setCurrentPage(newPage);
+        const newPage = Math.min(pagingPage + 1, totalPages);
+        setPagingPage(newPage);
         onPageChange(newPage);
     };
 
     return (
         <PaginationContainer>
-            <PaginationP onClick={goToPreviousPage} style={{ color: currentPage === 1 ? '#BAB4B4' : 'white', cursor: "pointer" }}>{'<'}</PaginationP>
-            <PaginationP>{currentPage}</PaginationP>
-            <PaginationP onClick={goToNextPage} style={{ color: currentPage === totalPages ? '#BAB4B4' : 'white', cursor: "pointer" }}>{'>'}</PaginationP>
+            <PaginationP onClick={goToPreviousPage} style={{ color: pagingPage === 1 ? '#BAB4B4' : 'white', cursor: "pointer" }}>{'<'}</PaginationP>
+            <PaginationP>{pagingPage}</PaginationP>
+            <PaginationP onClick={goToNextPage} style={{ color: pagingPage === totalPages ? '#BAB4B4' : 'white', cursor: "pointer" }}>{'>'}</PaginationP>
         </PaginationContainer>
     );
 }

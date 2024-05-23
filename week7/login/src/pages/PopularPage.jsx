@@ -4,19 +4,19 @@ import PageContainer from "../styles/PageStyle";
 import Pagination from "../components/PopularPage/Pagination";
 
 const PopularPage = () => {
-    const [currentPage, setCurrentPage] = useState(1);
+    const [pagingPage, setPagingPage] = useState(1);
 
     const handlePageChange = (newPage) => {
-        setCurrentPage(newPage);
+        setPagingPage(newPage);
     };
 
     useEffect(() => {
-        console.log(currentPage);
-    }, [currentPage]);
+        console.log(pagingPage);
+    }, [pagingPage]);
 
     return (
         <PageContainer>
-            <ListMovie Url="https://api.themoviedb.org/3/movie/popular" currentPage={currentPage}/>
+            <ListMovie Url="https://api.themoviedb.org/3/movie/popular" pagingPage={pagingPage}/>
             <Pagination Url="https://api.themoviedb.org/3/movie/popular" onPageChange={handlePageChange}/>
         </PageContainer>
     )
