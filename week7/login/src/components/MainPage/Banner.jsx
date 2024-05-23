@@ -16,12 +16,22 @@ const BannerP = styled.p`
 `
 
 const Banner = () => {
-    const signupLogs = localStorage.getItem('signupLogs');
-    const username = signupLogs ? JSON.parse(signupLogs).username : "";
+    const [username, setUsername] = useState('');
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const localUsername = localStorage.getItem('username');
+            setUsername(localUsername);
+            setLoading(false);
+        };
+
+        fetchData();
+    }, []);
 
     return (
         <BannerContainer>
-            <BannerP>{username + "님"} 환영합니다</BannerP>
+            <BannerP>{loading ? '로딩 중...' : `${username ? `${username}님 환영합니다` : '환영합니다'}`}</BannerP>
         </BannerContainer>
     )
 }

@@ -19,10 +19,21 @@ const InputBox = styled.input`
     font-size: 0.8vw;
 `
 
-const InputLogin = ({placeholder, type}) => {
+const ErrorP = styled.p`
+    font-size: 0.6vw;
+    font-weight: bold;
+    color: #FF0000;
+    position: absolute;
+    left: 0;
+    bottom: -1.9vw; 
+    padding-left: 0.5vw;
+`
+
+const InputLogin = ({placeholder, type, value, onChange, error}) => {
     return (
         <InputContainer>
-            <InputBox placeholder={placeholder} type={type}/>
+            <InputBox placeholder={placeholder} type={type} value={value} onChange={onChange}/>
+            {error && <ErrorP>{error}</ErrorP>}
         </InputContainer>
     )
 }
