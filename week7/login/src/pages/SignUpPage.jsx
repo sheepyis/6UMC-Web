@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { NavLink } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 import PageContainer from "../styles/PageStyle";
@@ -8,6 +9,14 @@ const SignUpP = styled.p`
     font-size: ${props => props.fontSize || "1vw"};
     color: white;
     font-weight: ${props => props.fontWeight || "normal"};
+`
+
+const SignUpP2 = styled(NavLink)`
+    font-size: 0.8vw;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: underline;
 `
 
 const SignUpContainer = styled.div`
@@ -40,6 +49,7 @@ const BottomContainer = styled.div`
     margin-top: 0.3vw;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 `
 
 const SignUpPage = () => {
@@ -207,7 +217,7 @@ const SignUpPage = () => {
             
             <BottomContainer>
                 <SignUpP fontSize="0.8vw">이미 아이디가 있으신가요?</SignUpP>
-                <SignUpP fontWeight="bold" fontSize="0.8vw" style={{cursor: "pointer", textDecoration: "underline"}}>로그인 페이지로 이동하기</SignUpP>
+                <SignUpP2 to="/login">로그인 페이지로 이동하기</SignUpP2>
             </BottomContainer>
         </PageContainer>
     )
