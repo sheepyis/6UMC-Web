@@ -11,7 +11,7 @@ const SignUpP = styled.p`
 `
 
 const SignUpContainer = styled.div`
-    margin-top: 2vw;
+    margin-top: 1vw;
     width: 31.7vw;
     display: flex;
     flex-direction: column;
@@ -29,7 +29,7 @@ const SignUpButton = styled.button`
     justify-content: center;
     align-items: center;
     cursor: ${ props => props.disabled ? 'not-allowed' : 'pointer'};
-    margin-top: 2vw;
+    margin-top: 0.5vw;
     font-size: 1.2vw;
     color: black;
     font-weight: bold;
@@ -45,12 +45,14 @@ const BottomContainer = styled.div`
 const SignUpPage = () => {
     // 입력 값
     const [name, setName] = useState('');
+    const [id, setId] = useState('');
     const [email, setEmail] = useState('');
     const [age, setAge] = useState('');
     const [password, setPassword] = useState('');
     const [passwordCheck, setPasswordCheck] = useState('');
     // 에러 메시지
     const [nameError, setNameError] = useState('');
+    const [idError, setIdError] = useState('');
     const [emailError, setEmailError] = useState('');
     const [ageError, setAgeError] = useState('');
     const [passwordError, setPasswordError] = useState('');
@@ -60,12 +62,12 @@ const SignUpPage = () => {
     const [isDisabled, setIsDisabled] = useState(true);
 
     useEffect(() => {
-        if (name && email && age && password && (password === passwordCheck)) {
+        if (name && id && email && age && password && (password === passwordCheck)) {
             setIsDisabled(false);
         } else {
             setIsDisabled(true);
         }
-    }, [name, email, age, password, passwordCheck]);
+    }, [name, id, email, age, password, passwordCheck]);
 
     // 이름 유효성 검사
     const handleName = (event) => {
@@ -76,6 +78,16 @@ const SignUpPage = () => {
             setNameError("이름을 입력해주세요!");
         } else { 
             setNameError('');
+        }
+    }
+
+    // 아이디 유효성 검사(프론트)
+    const handleId = (event) => {
+        const value = event.target.value;
+        setId(value);
+
+        if(!value) {
+            setIdError("아이디를 입력해주세요!");
         }
     }
 
@@ -149,31 +161,42 @@ const SignUpPage = () => {
     // 가입하기 통신
     const handleSignUp = () => {
         const userData = {
-            age: age,
-            checkpassword: passwordCheck,
+            name: name,
+            username: id,
             email: email,
+            age: age,
             password: password,
-            username: name
+            passwordCheck: passwordCheck,
         };
 
-        axios.post('https://jsonplaceholder.typicode.com/posts', userData)
+        axios.post('http://localhost:8080/auth/signup', userData)
             .then(response => {
-                console.log(response.data);
-                // 페이지 이동 시 콘솔 내용 보기 위해 로컬 스토리지에 저장
-                localStorage.setItem('signupLogs', JSON.stringify(response.data));
-                window.location.href = "/login";
+                if (response.status == 201) {
+                    console.log(response.data);
+                    alert("회원가입이 완료되었습니다.");
+                    window.location.href = "/login";
+                }
             })
             .catch(error => {
-                console.error('Error:', error);
+                if (error.response) {
+                    console.log('Error: ', error);
+                    if (error.response.status == 409) {
+                        alert("이미 아이디가 존재합니다.");
+                        window.location.href="/login";
+                    } else if (error.response.status == 400) {
+                        alert("비밀번호가 일치하지 않습니다.");
+                    }
+                }
             });
     }
 
     return (
         <PageContainer>
-            <SignUpP fontWeight="bold" style={{marginTop: "2.8vw"}}>회원가입 페이지</SignUpP>
+            <SignUpP fontWeight="bold" style={{marginTop: "2vw"}}>회원가입 페이지</SignUpP>
 
             <SignUpContainer>
                 <InputSignUp placeholder="이름을 입력해주세요" type="text" value={name} onChange={handleName} error={nameError}/>
+                <InputSignUp placeholder="아이디를 입력해주세요" type="text" value={id} onChange={handleId} error={idError}/>
                 <InputSignUp placeholder="이메일을 입력해주세요" type="text" value={email} onChange={handleEmail} error={emailError}/>
                 <InputSignUp placeholder="나이를 입력해주세요" type="text" value={age} onChange={handleAge} error={ageError}/>
                 <InputSignUp placeholder="비밀번호를 입력해주세요" type="password" value={password} onChange={handlePassword} error={passwordError}/>
