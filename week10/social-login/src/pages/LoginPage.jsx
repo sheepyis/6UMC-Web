@@ -3,6 +3,7 @@ import axios from "axios";
 import styled from "styled-components";
 import PageContainer from "../styles/PageStyle";
 import InputLogin from "../components/LoginPage/input-login";
+import LoginKakao from '../api/LoginKakao';
 
 const LoginP = styled.p`
     font-size: 1vw;
@@ -24,16 +25,19 @@ const LoginButton = styled.button`
     width: 100%;
     height: 3vw;
     border: none;
-    border-radius: 2.5vw;
+    border-radius: 1vw;
     background-color: ${ props => props.disabled ? 'white' : '#FFCC15'};
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: ${ props => props.disabled ? 'not-allowed' : 'pointer'};
-    margin-top: 2vw;
     font-size: 1.2vw;
     color: black;
     font-weight: bold;
+`
+
+const KakaoContainer = styled.div`
+    width: 100%;
 `
 
 const LoginPage = () => {
@@ -121,7 +125,13 @@ const LoginPage = () => {
                 <InputLogin placeholder="아이디" type="text" value={id} onChange={handleId} error={idError}/>
                 <InputLogin placeholder="비밀번호" type="password" value={password} onChange={handlePassword} error={passwordError}/>
 
+            
                 <LoginButton disabled={isDisabled} onClick={handleLogin}>로그인</LoginButton>
+                
+                <KakaoContainer>
+                    <LoginP style={{marginTop: "0"}}>카카오톡 소셜 로그인</LoginP>
+                    <LoginKakao/>
+                </KakaoContainer>
             </LoginContainer>
         </PageContainer>
     )
