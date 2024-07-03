@@ -46,11 +46,15 @@ const MenuItem = styled(NavLink)`
     }
 `;
 
-const Navbar2Menu = ({ handleMenu, menuVisible }) => {
+const Navbar2Menu = ({ handleMenu, menuVisible, isLogin, handleLogout  }) => {
     return (
         <MenuContainer menuVisible={menuVisible}>
             <MenuItem to="/signup" onClick={handleMenu}>회원가입</MenuItem>
-            <MenuItem to="/login" onClick={handleMenu}>로그인</MenuItem>
+            {isLogin ? (
+                <MenuItem as="div" onClick={() => { handleLogout(); handleMenu(); }}>로그아웃</MenuItem>
+            ) : (
+                <MenuItem to="/login" onClick={handleMenu}>로그인</MenuItem>
+            )}
             <MenuItem to="/popular" onClick={handleMenu}>Popular</MenuItem>
             <MenuItem to="/now" onClick={handleMenu}>Now Playing</MenuItem>
             <MenuItem to="/top" onClick={handleMenu}>Top Rated</MenuItem>

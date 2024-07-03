@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { FiMenu } from 'react-icons/fi';
 import Navbar2Menu from "./Navbar2Menu";
 
@@ -33,22 +33,46 @@ const NavP = styled(NavLink)`
     }
 `;
 
+const LogoContainer = styled.div`
+    display: flex;
+    align-items: cneter;
+    gap: 0.5vw;
+`
+
 const Navbar2 = () => {
+    const location = useLocation();
     const [menuVisible, setMenuVisible] = useState(false);
+    const [isLogin, setIsLogin] = useState(false);
+
 
     const handleMenu = () => {
         setMenuVisible(!menuVisible);
     };
 
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        setIsLogin(!!token);
+    }, []);
+
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('username');
+        setIsLogin(false);
+        window.location.href = kakaoLogoutURL;
+    }
+
     return (
         <NavContainer>
             <NavContainer2>
-                <NavP to="/">UMC Movie</NavP>
+                <LogoContainer>
+                    <NavP to="/">UMC Movie</NavP>
+                    <ShareKakao/>
+                </LogoContainer>
                 <NavP as="div" style={{fontSize: "1.5vw"}} onClick={handleMenu}>
                     <FiMenu />
                 </NavP>
             </NavContainer2>
-            <Navbar2Menu handleMenu={handleMenu} menuVisible={menuVisible} />
+            <Navbar2Menu handleMenu={handleMenu} menuVisible={menuVisible} isLogin={isLogin} handleLogout={handleLogout}/>
         </NavContainer>
     );
 };
