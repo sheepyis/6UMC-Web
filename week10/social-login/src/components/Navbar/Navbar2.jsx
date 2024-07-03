@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { FiMenu } from 'react-icons/fi';
 import Navbar2Menu from "./Navbar2Menu";
 import ShareKakao from "../../api/ShareKakao";
+import axios from "axios";
+import { getRedirectURI } from "../../api/RedirectURI";
 
 const NavContainer = styled.div`
     width: 100%;
@@ -41,10 +43,32 @@ const LogoContainer = styled.div`
 `
 
 const Navbar2 = () => {
+    const location = useLocation();
     const [menuVisible, setMenuVisible] = useState(false);
+    const [isLogin, setIsLogin] = useState(false);
 
     const handleMenu = () => {
         setMenuVisible(!menuVisible);
+    };
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        setIsLogin(!!token);
+    }, []);
+
+    const handleLogout = async () => {
+        const client_id = import.meta.env.VITE_KAKAO_REST_API;
+        const logout_redirect_uri = getRedirectURI();
+        const kakaoLogoutURL = `https://kauth.kakao.com/oauth/logout?client_id=${client_id}&logout_redirect_uri=${logout_redirect_uri}`;
+
+        try {
+            localStorage.removeItem('token');
+            localStorage.removeItem('username');
+            setIsLogin(false);
+            window.location.href = kakaoLogoutURL;
+        } catch (error) {
+            console.error('Error: ', error);
+        }
     };
 
     return (
@@ -58,7 +82,7 @@ const Navbar2 = () => {
                     <FiMenu />
                 </NavP>
             </NavContainer2>
-            <Navbar2Menu handleMenu={handleMenu} menuVisible={menuVisible} />
+            <Navbar2Menu handleMenu={handleMenu} menuVisible={menuVisible} isLogin={isLogin} handleLogout={handleLogout}/>
         </NavContainer>
     );
 };
