@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { FiMenu } from 'react-icons/fi';
 import Navbar2Menu from "./Navbar2Menu";
 import ShareKakao from "../../api/ShareKakao";
@@ -41,11 +41,26 @@ const LogoContainer = styled.div`
 `
 
 const Navbar2 = () => {
+    const location = useLocation();
     const [menuVisible, setMenuVisible] = useState(false);
+    const [isLogin, setIsLogin] = useState(false);
+
 
     const handleMenu = () => {
         setMenuVisible(!menuVisible);
     };
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        setIsLogin(!!token);
+    }, []);
+
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('username');
+        setIsLogin(false);
+        window.location.href = kakaoLogoutURL;
+    }
 
     return (
         <NavContainer>
@@ -58,7 +73,7 @@ const Navbar2 = () => {
                     <FiMenu />
                 </NavP>
             </NavContainer2>
-            <Navbar2Menu handleMenu={handleMenu} menuVisible={menuVisible} />
+            <Navbar2Menu handleMenu={handleMenu} menuVisible={menuVisible} isLogin={isLogin} handleLogout={handleLogout}/>
         </NavContainer>
     );
 };
